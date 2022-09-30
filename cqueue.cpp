@@ -2,22 +2,22 @@
 #include<string>
 using namespace std;
 
-template<class X> class queue {
+template<class X> class cqueue {
     int tail,size,head;
     X *stk;
     public:
-    queue(){
+    cqueue(){
         tail =head= -1;
         size=0;
         stk = nullptr;
     }
-    queue(int len){
+    cqueue(int len){
         tail =head= -1;
         size=len;
         stk = new X[size];
     }
     void clear(){
-        tail=head= -1;
+        tail =head= -1;
     }
     bool isempty(){
         if(tail==-1) return true;
@@ -26,28 +26,16 @@ template<class X> class queue {
     }
 
     void enqueue(X ele){
-        if(tail==size-1 && head==0){
-            cout<<"queue Overflow!\n";
+        if(tail=head-1 || ((tail == size-1)&&(head==0))){
+            cout<<"cqueue Overflow!\n";
             return;
         }
-        else if (tail=head-1)
-        {
-            cout<<"queue Overflow!\n";
-            return;
-        }
-        
         else
         {
             if(isempty()){
                 stk[++tail]=ele;
                 head = 0;
             }
-            else if (tail==size-1 && head!=0)
-            {
-                tail = 0;
-                stk[tail]=ele;
-            }
-            
             else
             stk[++tail]=ele;
         }
@@ -56,7 +44,7 @@ template<class X> class queue {
 
     X dequeue(){
         if(isempty()){
-            cout<<"queue is Empty";
+            cout<<"cqueue is Empty";
             return (X)NULL;
         }
         else{
@@ -81,7 +69,7 @@ template<class X> class queue {
            cout<<"No Element to display!";
             return; 
         }
-        for(int i=head;i<tail+1;i++){
+        for(int i=0;i<size;i++){
             cout<<stk[i]<<" ";
         }cout<<endl;
     }
@@ -93,16 +81,16 @@ int main(){
     int choice,noe;
     cout<<"Enter Choice for the type of elements:\n1. Integer\n2.Character\n3.String\n4.Float\nEnter Choice : ";
     cin>>choice;
-    cout<<"Enter the length of the queue:";cin>>noe;
+    cout<<"Enter the length of the cqueue:";cin>>noe;
     switch (choice)
     {
     case 1:{
         system("cls");
-        queue<int> s1(noe);
+        cqueue<int> s1(noe);
         int choice2=1;
         while(choice2!=0){
             
-            cout<<"1.Clear the List\n2. Check is EMpty\n3.enqueue an Element\n4.dequeue an Element\n5.Inspect tail Element\n6.Display the queue\n0.To Exit the program\nEnter your choice Please : ";
+            cout<<"1.Clear the List\n2. Check is EMpty\n3.enqueue an Element\n4.dequeue an Element\n5.Inspect tail Element\n6.Display the cqueue\n0.To Exit the program\nEnter your choice Please : ";
             cin>>choice2;
             switch (choice2)
             {
@@ -139,11 +127,11 @@ int main(){
     }
     case 2:{
         
-        queue<char> s1(noe);
+        cqueue<char> s1(noe);
         int choice2;
         while(choice2!=0){
             
-            cout<<"1.Clear the List\n2. Check is EMpty\n3.enqueue an Element\n4.dequeue an Element\n5.Inspect tail Element\n6.Display the queue\n0.To Exit the program\nEnter your choice Please : ";
+            cout<<"1.Clear the List\n2. Check is EMpty\n3.enqueue an Element\n4.dequeue an Element\n5.Inspect tail Element\n6.Display the cqueue\n0.To Exit the program\nEnter your choice Please : ";
             cin>>choice2;
             switch (choice2)
             {
@@ -180,11 +168,11 @@ int main(){
     }
     case 3:{
         
-        queue<string> s1(noe);
+        cqueue<string> s1(noe);
         int choice2=1;
         while(choice2!=0){
             
-            cout<<"1.Clear the List\n2. Check is EMpty\n3.enqueue an Element\n4.dequeue an Element\n5.Inspect tail Element\n6.Display the queue\n0.To Exit the program\nEnter your choice Please : ";
+            cout<<"1.Clear the List\n2. Check is EMpty\n3.enqueue an Element\n4.dequeue an Element\n5.Inspect tail Element\n6.Display the cqueue\n0.To Exit the program\nEnter your choice Please : ";
             cin>>choice2;
             switch(choice2)
             {
@@ -220,10 +208,10 @@ int main(){
     }
     case 4:{
         
-        queue<float> s1(noe);
+        cqueue<float> s1(noe);
         int choice2=1;
         while(choice2!=0){
-            cout<<"1.Clear the List\n2. Check is EMpty\n3.enqueue an Element\n4.dequeue an Element\n5.Inspect tail Element\n6.Display the queue\n0.To Exit the program\nEnter your choice Please : ";
+            cout<<"1.Clear the List\n2. Check is EMpty\n3.enqueue an Element\n4.dequeue an Element\n5.Inspect tail Element\n6.Display the cqueue\n0.To Exit the program\nEnter your choice Please : ";
             cin>>choice2;
             switch (choice2)
             {
@@ -260,10 +248,10 @@ int main(){
     
     
     }
-    default:{
-        break;
+        default:{
+            break;
     
-    }
+        }
     }
     return 0;
 }
